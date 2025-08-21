@@ -65,7 +65,7 @@ if __name__ == "__main__":
     context = load_pdfs()
     user_query = input("Ask a question: ")
     answer = ask_gemini(user_query, context)
-    print("Gemini:", answer)```
+    print("Gemini:", answer)```python
 
 *For most optimal results I wanted to send through the PDF files themselves, not just their text*
 
