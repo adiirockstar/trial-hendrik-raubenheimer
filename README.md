@@ -114,7 +114,7 @@ This will load the entire PDF file into the variable pdf_bytes as a bytes object
 
 *I got a minimal RAG going, and asked copilot to convert it to a Streamlit app*
 
-**Prompt:** Convert this to a Streamlit app
+**Prompt:** Convert this to a Streamlit app \
 **Response:**
 ```python
 from google import genai
