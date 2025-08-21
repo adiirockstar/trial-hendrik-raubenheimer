@@ -44,7 +44,7 @@ I primarily used GitHub copilot power by Claude Sonnet 4.
 import glob
 import PyPDF2
 
-
+\# Load and concatenate text from all PDFs in ./Input
 def load_pdfs(input_dir="./Input"):
     text = ""
     for pdf_file in glob.glob(os.path.join(input_dir, "*.pdf")):
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     pdf_paths = load_pdf_paths()
     user_query = input("Ask a question: ")
     answer = ask_gemini_with_files(user_query, pdf_paths)
-    print("Gemini:", answer)<\code>
+    print("Gemini:", answer)</code>
 
 *At this point I realised my coding agent is not familiar with Gemini's API, so I decided to code manually for a bit given I have experience with the API. I began by checking how to convert pdf files to bytes*
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 In Python, you can read a PDF file in bytes by opening it with the "rb" (read-binary) mode:
 
 <code>with open("path/to/file.pdf", "rb") as f:
-    pdf_bytes = f.read()<\code>
+    pdf_bytes = f.read()</code>
 
 This will load the entire PDF file into the variable pdf_bytes as a bytes object. You can then use this bytes object with libraries like PyPDF2, pdfplumber, or send it over a network, etc.
 
@@ -138,4 +138,4 @@ if st.button("Analyze PDFs", type="primary"):
             ))
         response = chat.send_message("What is the content of these PDFs?")
         st.subheader("Gemini Response:")
-        st.write(response.text)<\code>
+        st.write(response.text)</code>
