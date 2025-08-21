@@ -97,7 +97,7 @@ if __name__ == "__main__":
 
 ***At this point I realised my coding agent is not familiar with Gemini's API, so I decided to code manually for a bit given I have experience with the API. I began by checking how to convert pdf files to bytes***
 
-**Prompt:** How can I read in a pdf in bytes
+**Prompt:** How can I read in a pdf in bytes \
 **Response:**\
 <code>In Python, you can read a PDF file in bytes by opening it with the "rb" (read-binary) mode:
 
@@ -105,3 +105,37 @@ with open("path/to/file.pdf", "rb") as f:
     pdf_bytes = f.read()
 
 This will load the entire PDF file into the variable pdf_bytes as a bytes object. You can then use this bytes object with libraries like PyPDF2, pdfplumber, or send it over a network, etc.<\code>
+
+***I got a minimal RAG going, and asked copilot to convert it to a Streamlit app***
+
+**Prompt:** Convert this to a Streamlit app
+**Response:**\
+<code>from google import genai
+import os
+import glob
+import streamlit as st
+
+def load_pdfs(input_dir="./Input"):
+    data = []
+    for pdf_file in glob.glob(os.path.join(input_dir, "*.pdf")):
+        with open(pdf_file, "rb") as f:
+            pdf_bytes = f.read()
+            data.append(pdf_bytes)
+    return data
+
+st.title("PDF Content Summarizer")
+
+if st.button("Analyze PDFs", type="primary"):
+    with st.spinner("Processing PDFs..."):
+        client = genai.Client()
+        chat = client.chats.create(model="gemini-2.5-flash")
+        pdf_data = load_pdfs()
+
+        for pdf_bytes in pdf_data:
+            chat.send_message(genai.types.Part.from_bytes(
+                data=pdf_bytes,
+                mime_type='application/pdf'
+            ))
+        response = chat.send_message("What is the content of these PDFs?")
+        st.subheader("Gemini Response:")
+        st.write(response.text)<\code>
