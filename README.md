@@ -28,7 +28,7 @@ I thrive on challenges, on diving deep into complex problems, and on building th
 
 ## Improvements to Be Made
 
-The 'Behaviour.pdf' seems to have the desired effect on the chatbot, but my list of go-to phrases are generally overused. Additionally, there are certain phrases in the cover letter it also overuses. Its hard to definitively say what an influence the philosophy information has, but it seems to not have much influence. Occasionally the chatbot will refer to phrases like 'will to power', but there is not strong evidence that its speech is molded by the philosophy in anyway.
+The 'Behaviour.pdf' seems to have the desired effect on the chatbot, but my list of go-to phrases are generally overused. Additionally, there are certain phrases in the cover letter it also overuses. Its hard to definitively say what an influence the philosophy information has, but it seems to not have much influence. Occasionally the chatbot will refer to phrases like 'will to power', but there is not strong evidence that its speech is molded by the philosophy in anyway. I have also witnessed a fair bit of hallucination with regards to information about me. This could be improved with a lower temperature setting.
 
 ## Show Your Thinking
 
