@@ -34,6 +34,8 @@ The 'Behaviour.pdf' seems to have the desired effect on the chatbot, but my list
 
 I primarily used GitHub copilot power by Claude Sonnet 4.
 
+All drag
+
 #### AI Prompt Timeline
 
 *I started by getting copilot to make a RAG agent after I imported Gemini's API*
