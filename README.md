@@ -44,7 +44,7 @@ I primarily used GitHub copilot power by Claude Sonnet 4.
 import glob
 import PyPDF2
 
-\# Load and concatenate text from all PDFs in ./Input
+
 def load_pdfs(input_dir="./Input"):
     text = ""
     for pdf_file in glob.glob(os.path.join(input_dir, "*.pdf")):
