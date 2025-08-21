@@ -239,4 +239,61 @@ if selected_option != "None":
         print(f"[DEBUG] Testing Gemini connection...")
     elif selected_option == "Clear Memory":
         print(f"[DEBUG] Memory cleared (simulated)")
-***
+```
+
+*I wanted to add functionality for the extension of the dataset with a drag and drop feature*
+
+**Prompt:** Add a drag and drop feature to the app that allows the user to upload new PDFs for the chatbot to learn from \
+**Response:**
+```python
+# Save uploaded files to the Input directory
+def save_uploaded_files(uploaded_files, input_dir="./Input"):
+    """Save uploaded files to the Input directory"""
+    if not os.path.exists(input_dir):
+        os.makedirs(input_dir)
+    
+    saved_files = []
+    for uploaded_file in uploaded_files:
+        file_path = os.path.join(input_dir, uploaded_file.name)
+        with open(file_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        saved_files.append(file_path)
+    return saved_files
+
+# File upload section
+st.sidebar.header("📁 Upload Files")
+uploaded_files = st.sidebar.file_uploader(
+    "Drag and drop files here or click to browse",
+    accept_multiple_files=True,
+    type=['pdf', 'txt', 'doc', 'docx'],
+    help="Upload files to add to Hendrik's knowledge base"
+)
+
+# If files are uploaded, process them
+if uploaded_files:
+    with st.sidebar:
+        if st.button("Add Files to Knowledge Base", type="primary"):
+            with st.spinner("Processing uploaded files..."):
+                try:
+                    saved_files = save_uploaded_files(uploaded_files)
+                    process_new_files(chat, saved_files)
+                    
+                    st.success(f"Successfully added {len(saved_files)} file(s):")
+                    for file_path in saved_files:
+                        st.write(f"• {os.path.basename(file_path)}")
+                    
+                    # Clear the uploaded files from session
+                    st.rerun()
+                    
+                except Exception as e:
+                    st.error(f"Error processing files: {str(e)}")
+
+# Display current files in Input directory
+with st.sidebar.expander("📋 Current Files", expanded=False):
+    input_files = glob.glob("./Input/*")
+    if input_files:
+        for file_path in input_files:
+            st.write(f"• {os.path.basename(file_path)}")
+    else:
+        st.write("No files in Input directory")
+```
