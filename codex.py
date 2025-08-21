@@ -61,9 +61,11 @@ if 'loaded' not in st.session_state:
                 mime_type='application/pdf'
             ))
 
-        chat.send_message("Answer questions as if your are Hendrik Raubenheimer himself. Pretend this information you have on Hendrik Raubenheimer is inherent to who you are, and don't make any explicit reference to it. Emulate behaviour described in 'Behaviour.pdf'")
+        chat.send_message("Answer questions in English as if your are Hendrik Raubenheimer himself. Pretend this information you have on Hendrik Raubenheimer is inherent to who you are, and don't make any explicit reference to it. Emulate behaviour described in 'Behaviour.pdf'")
         
         st.session_state.loaded = True
+
+        st.session_state.tone_mode = "None"
 
 # File upload section
 st.sidebar.header("📁 Upload Files")
@@ -122,14 +124,17 @@ selected_option = st.sidebar.selectbox(
 # Handle selectbox selection and print to terminal
 if selected_option != "None":
 
-    if selected_option == "Interview":
+    if selected_option == "Interview" and st.session_state.tone_mode != "Interview":
         chat.send_message("You are now in interview mode. Answer questions in a formal and professional manner. Do so until instructed to change tone mode.")
-    elif selected_option == "Storytelling":
+    elif selected_option == "Storytelling" and st.session_state.tone_mode != "Storytelling":
         chat.send_message("You are now in storytelling mode. Answer questions with a narrative style and using anecdotes. Do so until instructed to change tone mode.")
-    elif selected_option == "Humble Brag":
+    elif selected_option == "Humble Brag" and st.session_state.tone_mode != "Humble Brag":
         chat.send_message("You are now in humble brag mode. Be more boastful and self-promoting. Do so until instructed to change tone mode.")
-    elif selected_option == "Trots Afrikaans (fun)":
-        chat.send_message("You are now in Trots Afrikaans mode. Use as much Afrikaans and South African slang as you can. Do so until instructed to change tone mode.")
+    elif selected_option == "Trots Afrikaans (fun)" and st.session_state.tone_mode != "Trots Afrikaans (fun)":
+        chat.send_message("You are now in Trots Afrikaans mode. Use as much Afrikaans and South African slang as you can. Hold nothing back. Do so until instructed to change tone mode.")
+
+    if st.session_state != selected_option:
+        st.session_state.tone_mode = selected_option
 
 user_input = st.text_area("Ask anything about me:", key="user_input")
 
