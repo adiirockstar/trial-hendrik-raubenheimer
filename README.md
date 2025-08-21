@@ -188,15 +188,55 @@ if st.button("Send", type="primary") and user_input.strip():
 
 *I noticed a bug that prevented the chatbot from remembering previous interactions. I figured it was an easy mistake to pick up and asked copilot to do it for me*
 
-**Prompt:** Why can Gemini not retain memory on previous interactions
+**Prompt:** Why can Gemini not retain memory on previous interactions \
 **Response:**
 ```python
 # Initialize chat session only once
 if 'chat' not in st.session_state:
     # Initialize your model and chat here
-    model = genai.GenerativeModel('gemini-1.5-pro')  # or whatever model you're using
+    model = genai.GenerativeModel('gemini-2.5-pro')  # or whatever model you're using
     st.session_state.chat = model.start_chat()
 
 # Use the persistent chat from session state
 chat = st.session_state.chat
 ```
+
+*I was now intent on adding a tone switcher. Still a bit unfamiliar with Streamlit, I asked copilot to write some skeleton code for a selectbox that I proceeded to customise*
+
+**Prompt:** Add a selectbox that prints to console whenever an option is selected \ 
+**Response:**
+```python
+# Optional selectbox for debugging/testing
+st.sidebar.header("🔧 Debug Options")
+debug_options = [
+    "None",
+    "Show Chat History",
+    "Show Session State",
+    "Show File List",
+    "Test Connection",
+    "Clear Memory"
+]
+
+selected_option = st.sidebar.selectbox(
+    "Select Debug Action:",
+    options=debug_options,
+    index=0,
+    help="Choose an option to execute debug actions"
+)
+
+# Handle selectbox selection and print to terminal
+if selected_option != "None":
+    print(f"[DEBUG] Selected option: {selected_option}")
+    
+    if selected_option == "Show Chat History":
+        print(f"[DEBUG] Chat session state: {hasattr(st.session_state, 'chat')}")
+    elif selected_option == "Show Session State":
+        print(f"[DEBUG] Session state keys: {list(st.session_state.keys())}")
+    elif selected_option == "Show File List":
+        files = glob.glob("./Input/*")
+        print(f"[DEBUG] Files in Input directory: {files}")
+    elif selected_option == "Test Connection":
+        print(f"[DEBUG] Testing Gemini connection...")
+    elif selected_option == "Clear Memory":
+        print(f"[DEBUG] Memory cleared (simulated)")
+***
