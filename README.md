@@ -65,3 +65,32 @@ if __name__ == "__main__":
     user_query = input("Ask a question: ")
     answer = ask_gemini(user_query, context)
     print("Gemini:", answer)</code>
+
+***For most optimal results I wanted to send through the PDF files themselves, not just their text***
+
+**Prompt:** Instead of sending through the text of these pdfs to Gemini, send through the pdfs themselves \
+**Response:**\
+<code>import os
+import glob
+import PyPDF2
+
+# Load all PDF file paths from ./Input
+def load_pdf_paths(input_dir="./Input"):
+    return glob.glob(os.path.join(input_dir, "*.pdf"))
+
+# Minimal RAG: send PDFs as files to Gemini (if supported)
+def ask_gemini_with_files(query, pdf_paths):
+    # genai.generate_content supports file input via the 'files' parameter
+    # This assumes the API and SDK support file uploads
+    files = []
+    for path in pdf_paths:
+        files.append({"file_path": path, "mime_type": "application/pdf"})
+    prompt = f"Question: {query}\nPlease answer using the attached PDFs."
+    response = genai.generate_content(prompt, files=files)
+    return response.text
+
+if __name__ == "__main__":
+    pdf_paths = load_pdf_paths()
+    user_query = input("Ask a question: ")
+    answer = ask_gemini_with_files(user_query, pdf_paths)
+    print("Gemini:", answer)<\code>
