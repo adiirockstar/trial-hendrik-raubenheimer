@@ -39,7 +39,7 @@ I primarily used GitHub copilot power by Claude Sonnet 4.
 *I started by getting copilot to make a RAG agent after I imported Gemini's API*
 
 **Prompt:** Create a simple RAG agent built off Gemini's API, and that uses data in /Input \
-**Response:** \
+**Response:**
 ```python
 import os
 import glob
@@ -65,7 +65,8 @@ if __name__ == "__main__":
     context = load_pdfs()
     user_query = input("Ask a question: ")
     answer = ask_gemini(user_query, context)
-    print("Gemini:", answer)```python
+    print("Gemini:", answer)
+```
 
 *For most optimal results I wanted to send through the PDF files themselves, not just their text*
 
