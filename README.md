@@ -36,4 +36,30 @@ I primarily used GitHub copilot power by Claude Sonnet 4.
 
 #### AI Prompt Timeline
 
+**Prompt:** Create a simple RAG agent built off Gemini's API, and that uses data in /Input (With 'from google import genai' already typed out) \
+**Response:** \
+<code>import os
+import glob
+import PyPDF2
 
+# Load and concatenate text from all PDFs in ./Input
+def load_pdfs(input_dir="./Input"):
+    text = ""
+    for pdf_file in glob.glob(os.path.join(input_dir, "*.pdf")):
+        with open(pdf_file, "rb") as f:
+            reader = PyPDF2.PdfReader(f)
+            for page in reader.pages:
+                text += page.extract_text() or ""
+    return text
+
+# Minimal RAG: retrieve context and ask Gemini
+def ask_gemini(query, context):
+    prompt = f"Context:\n{context}\n\nQuestion: {query}\nAnswer:"
+    response = genai.generate_content(prompt)
+    return response.text
+
+if __name__ == "__main__":
+    context = load_pdfs()
+    user_query = input("Ask a question: ")
+    answer = ask_gemini(user_query, context)
+    print("Gemini:", answer)</code>
