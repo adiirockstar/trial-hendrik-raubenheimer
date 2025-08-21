@@ -4,6 +4,7 @@ import glob
 from google import genai
 import streamlit as st
 
+# Load in the pdf files as bytes
 def load_pdfs(input_dir="./Input"):
     data = []
     for pdf_file in glob.glob(os.path.join(input_dir, "*.pdf")):
@@ -13,6 +14,7 @@ def load_pdfs(input_dir="./Input"):
             data.append(pdf_bytes)
     return data
 
+# Save uploaded files to the Input directory
 def save_uploaded_files(uploaded_files, input_dir="./Input"):
     """Save uploaded files to the Input directory"""
     if not os.path.exists(input_dir):
@@ -26,6 +28,7 @@ def save_uploaded_files(uploaded_files, input_dir="./Input"):
         saved_files.append(file_path)
     return saved_files
 
+# Process newly uploaded files and add them to the chat
 def process_new_files(chat, new_files):
     """Process newly uploaded files and add them to the chat"""
     for file_path in new_files:
@@ -71,6 +74,7 @@ uploaded_files = st.sidebar.file_uploader(
     help="Upload files to add to Hendrik's knowledge base"
 )
 
+# If files are uploaded, process them
 if uploaded_files:
     with st.sidebar:
         if st.button("Add Files to Knowledge Base", type="primary"):
@@ -100,6 +104,7 @@ with st.sidebar.expander("📋 Current Files", expanded=False):
 
 user_input = st.text_area("Ask anything about me:", key="user_input")
 
+# Send the user's input to the chat
 if st.button("Send", type="primary") and user_input.strip():
     with st.spinner("Thinking..."):
         response = chat.send_message(user_input)
