@@ -34,7 +34,7 @@ The 'Behaviour.pdf' seems to have the desired effect on the chatbot, but my list
 
 I primarily used GitHub copilot power by Claude Sonnet 4.
 
-All drag
+All drag and drop functionality for additional training data was made completely with AI. Almost everything else was generated with AI with my own modifications.
 
 #### AI Prompt Timeline
 
