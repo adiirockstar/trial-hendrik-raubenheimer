@@ -45,7 +45,7 @@ import os
 import glob
 import PyPDF2
 
-\# Load and concatenate text from all PDFs in ./Input
+# Load and concatenate text from all PDFs in ./Input
 def load_pdfs(input_dir="./Input"):
     text = ""
     for pdf_file in glob.glob(os.path.join(input_dir, "*.pdf")):
@@ -55,7 +55,7 @@ def load_pdfs(input_dir="./Input"):
                 text += page.extract_text() or ""
     return text
 
-\# Minimal RAG: retrieve context and ask Gemini
+# Minimal RAG: retrieve context and ask Gemini
 def ask_gemini(query, context):
     prompt = f"Context:\n{context}\n\nQuestion: {query}\nAnswer:"
     response = genai.generate_content(prompt)
@@ -71,16 +71,17 @@ if __name__ == "__main__":
 *For most optimal results I wanted to send through the PDF files themselves, not just their text*
 
 **Prompt:** Instead of sending through the text of these pdfs to Gemini, send through the pdfs themselves \
-**Response:**\
-<code>import os
+**Response:**
+```python
+import os
 import glob
 import PyPDF2
 
-\# Load all PDF file paths from ./Input
+# Load all PDF file paths from ./Input
 def load_pdf_paths(input_dir="./Input"):
     return glob.glob(os.path.join(input_dir, "*.pdf"))
 
-\# Minimal RAG: send PDFs as files to Gemini (if supported)
+# Minimal RAG: send PDFs as files to Gemini (if supported)
 def ask_gemini_with_files(query, pdf_paths):
     \# genai.generate_content supports file input via the 'files' parameter
     \# This assumes the API and SDK support file uploads
@@ -95,24 +96,28 @@ if __name__ == "__main__":
     pdf_paths = load_pdf_paths()
     user_query = input("Ask a question: ")
     answer = ask_gemini_with_files(user_query, pdf_paths)
-    print("Gemini:", answer)</code>
+    print("Gemini:", answer)
+```
 
 *At this point I realised my coding agent is not familiar with Gemini's API, so I decided to code manually for a bit given I have experience with the API. I began by checking how to convert pdf files to bytes*
 
 **Prompt:** How can I read in a pdf in bytes \
-**Response:**\
+**Response:**
 In Python, you can read a PDF file in bytes by opening it with the "rb" (read-binary) mode:
 
-<code>with open("path/to/file.pdf", "rb") as f:
-    pdf_bytes = f.read()</code>
+```python
+with open("path/to/file.pdf", "rb") as f:
+    pdf_bytes = f.read()
+```
 
 This will load the entire PDF file into the variable pdf_bytes as a bytes object. You can then use this bytes object with libraries like PyPDF2, pdfplumber, or send it over a network, etc.
 
 *I got a minimal RAG going, and asked copilot to convert it to a Streamlit app*
 
 **Prompt:** Convert this to a Streamlit app
-**Response:**\
-<code>from google import genai
+**Response:**
+```python
+from google import genai
 import os
 import glob
 import streamlit as st
@@ -140,4 +145,5 @@ if st.button("Analyze PDFs", type="primary"):
             ))
         response = chat.send_message("What is the content of these PDFs?")
         st.subheader("Gemini Response:")
-        st.write(response.text)</code>
+        st.write(response.text)
+```
