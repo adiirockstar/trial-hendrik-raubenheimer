@@ -74,14 +74,14 @@ if __name__ == "__main__":
 import glob
 import PyPDF2
 
-# Load all PDF file paths from ./Input
+\# Load all PDF file paths from ./Input
 def load_pdf_paths(input_dir="./Input"):
     return glob.glob(os.path.join(input_dir, "*.pdf"))
 
-# Minimal RAG: send PDFs as files to Gemini (if supported)
+\# Minimal RAG: send PDFs as files to Gemini (if supported)
 def ask_gemini_with_files(query, pdf_paths):
-    # genai.generate_content supports file input via the 'files' parameter
-    # This assumes the API and SDK support file uploads
+    \# genai.generate_content supports file input via the 'files' parameter
+    \# This assumes the API and SDK support file uploads
     files = []
     for path in pdf_paths:
         files.append({"file_path": path, "mime_type": "application/pdf"})
