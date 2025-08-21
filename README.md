@@ -36,7 +36,7 @@ I primarily used GitHub copilot power by Claude Sonnet 4.
 
 #### AI Prompt Timeline
 
-***I started by getting copilot to make a RAG agent after I imported Gemini's API***
+*I started by getting copilot to make a RAG agent after I imported Gemini's API*
 
 **Prompt:** Create a simple RAG agent built off Gemini's API, and that uses data in /Input \
 **Response:** \
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     answer = ask_gemini(user_query, context)
     print("Gemini:", answer)</code>
 
-***For most optimal results I wanted to send through the PDF files themselves, not just their text***
+*For most optimal results I wanted to send through the PDF files themselves, not just their text*
 
 **Prompt:** Instead of sending through the text of these pdfs to Gemini, send through the pdfs themselves \
 **Response:**\
@@ -95,18 +95,18 @@ if __name__ == "__main__":
     answer = ask_gemini_with_files(user_query, pdf_paths)
     print("Gemini:", answer)<\code>
 
-***At this point I realised my coding agent is not familiar with Gemini's API, so I decided to code manually for a bit given I have experience with the API. I began by checking how to convert pdf files to bytes***
+*At this point I realised my coding agent is not familiar with Gemini's API, so I decided to code manually for a bit given I have experience with the API. I began by checking how to convert pdf files to bytes*
 
 **Prompt:** How can I read in a pdf in bytes \
 **Response:**\
-<code>In Python, you can read a PDF file in bytes by opening it with the "rb" (read-binary) mode:
+In Python, you can read a PDF file in bytes by opening it with the "rb" (read-binary) mode:
 
-with open("path/to/file.pdf", "rb") as f:
-    pdf_bytes = f.read()
+<code>with open("path/to/file.pdf", "rb") as f:
+    pdf_bytes = f.read()<\code>
 
-This will load the entire PDF file into the variable pdf_bytes as a bytes object. You can then use this bytes object with libraries like PyPDF2, pdfplumber, or send it over a network, etc.<\code>
+This will load the entire PDF file into the variable pdf_bytes as a bytes object. You can then use this bytes object with libraries like PyPDF2, pdfplumber, or send it over a network, etc.
 
-***I got a minimal RAG going, and asked copilot to convert it to a Streamlit app***
+*I got a minimal RAG going, and asked copilot to convert it to a Streamlit app*
 
 **Prompt:** Convert this to a Streamlit app
 **Response:**\
