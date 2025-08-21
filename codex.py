@@ -102,6 +102,35 @@ with st.sidebar.expander("📋 Current Files", expanded=False):
     else:
         st.write("No files in Input directory")
 
+# Optional selectbox for switching tone
+st.sidebar.header("🔧 Tone Switcher")
+debug_options = [
+    "None",
+    "Interview",
+    "Storytelling",
+    "Humble Brag",
+    "Trots Afrikaans (fun)"
+]
+
+selected_option = st.sidebar.selectbox(
+    "Select Tone:",
+    options=debug_options,
+    index=0,
+    help="Choose an option to change tone"
+)
+
+# Handle selectbox selection and print to terminal
+if selected_option != "None":
+
+    if selected_option == "Interview":
+        chat.send_message("You are now in interview mode. Answer questions in a formal and professional manner. Do so until instructed to change tone mode.")
+    elif selected_option == "Storytelling":
+        chat.send_message("You are now in storytelling mode. Answer questions with a narrative style and using anecdotes. Do so until instructed to change tone mode.")
+    elif selected_option == "Humble Brag":
+        chat.send_message("You are now in humble brag mode. Be more boastful and self-promoting. Do so until instructed to change tone mode.")
+    elif selected_option == "Trots Afrikaans (fun)":
+        chat.send_message("You are now in Trots Afrikaans mode. Use as much Afrikaans and South African slang as you can. Do so until instructed to change tone mode.")
+
 user_input = st.text_area("Ask anything about me:", key="user_input")
 
 # Send the user's input to the chat

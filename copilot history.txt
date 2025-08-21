@@ -147,3 +147,39 @@ if 'chat' not in st.session_state:
 
 # Use the persistent chat from session state
 chat = st.session_state.chat
+
+Add a selectbox that prints to console whenever an option is selected
+
+# Optional selectbox for debugging/testing
+st.sidebar.header("🔧 Debug Options")
+debug_options = [
+    "None",
+    "Show Chat History",
+    "Show Session State",
+    "Show File List",
+    "Test Connection",
+    "Clear Memory"
+]
+
+selected_option = st.sidebar.selectbox(
+    "Select Debug Action:",
+    options=debug_options,
+    index=0,
+    help="Choose an option to execute debug actions"
+)
+
+# Handle selectbox selection and print to terminal
+if selected_option != "None":
+    print(f"[DEBUG] Selected option: {selected_option}")
+    
+    if selected_option == "Show Chat History":
+        print(f"[DEBUG] Chat session state: {hasattr(st.session_state, 'chat')}")
+    elif selected_option == "Show Session State":
+        print(f"[DEBUG] Session state keys: {list(st.session_state.keys())}")
+    elif selected_option == "Show File List":
+        files = glob.glob("./Input/*")
+        print(f"[DEBUG] Files in Input directory: {files}")
+    elif selected_option == "Test Connection":
+        print(f"[DEBUG] Testing Gemini connection...")
+    elif selected_option == "Clear Memory":
+        print(f"[DEBUG] Memory cleared (simulated)")
