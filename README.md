@@ -8,7 +8,7 @@ I opted for Streamlit as my UI platform of choice. Streamlit has a reputation fo
 
 The training data consists of PDF documents. The first document is my CV, the second document is an old cover letter I chose for its additional information on my background and personality, and the third document is called 'Behaviour' and is custom made for this agent. 'Behaviour.pdf' is a direct attempt at giving the chatbot my personality and voice, while the first two documents are more focused towards providing information. It makes broad claims about how I communicate, and includes a list of phrases I frequently use. 
 
-I explored the applicability of philosophy in this project. I have a deep-rooted passion for philosophy and can confidently say it has an influence on me. I speculatively included 3 philosophers I like in 'Behaviour' along with what philosophy of theirs I like.
+I explored the applicability of philosophy in this project. I have a deep-rooted passion for philosophy and can confidently say it has an influence on me. I speculatively included 3 philosophers I like in 'Behaviour' along with what philosophy of theirs I find inspiring.
 
 This submission's bonus features include a drag and drop feature for additional training data, and a tone switcher that can switch between "Interview", "Storytelling", "Humble Brag" and "Trots Afrikaans (fun)".
 
