@@ -171,3 +171,32 @@ if st.button("Analyze PDFs", type="primary"):
         st.subheader("Gemini Response:")
         st.write(response.text)
 ```
+
+*Up till this point a hardcoded message would be sent through, but I required the user to be able to send through custom messages*
+
+**Prompt:** Replace the button with a textpane that sends messages to Gemini, and write the responses \
+**Response:***
+```python
+user_input = st.text_area("Ask Gemini about the PDFs:", key="user_input")
+
+if st.button("Send", type="primary") and user_input.strip():
+    with st.spinner("Gemini is thinking..."):
+        response = chat.send_message(user_input)
+        st.subheader("Gemini Response:")
+        st.write(response.text)
+```
+
+*I noticed a bug that prevented the chatbot from remembering previous interactions. I figured it was an easy mistake to pick up and asked copilot to do it for me*
+
+**Prompt:** Why can Gemini not retain memory on previous interactions
+**Response:**
+```python
+# Initialize chat session only once
+if 'chat' not in st.session_state:
+    # Initialize your model and chat here
+    model = genai.GenerativeModel('gemini-1.5-pro')  # or whatever model you're using
+    st.session_state.chat = model.start_chat()
+
+# Use the persistent chat from session state
+chat = st.session_state.chat
+```
