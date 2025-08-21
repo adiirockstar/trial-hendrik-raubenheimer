@@ -147,3 +147,27 @@ if st.button("Analyze PDFs", type="primary"):
         st.subheader("Gemini Response:")
         st.write(response.text)
 ```
+
+*I noticed the PDFs would load in everytime I sent a message*
+
+**Prompt:** Have the PDFs load in only once \
+**Response:**
+```python
+if 'pdfs_loaded' not in st.session_state:
+    with st.spinner("Loading PDFs..."):
+        pdf_data = load_pdfs()
+        
+        for pdf_bytes in pdf_data:
+            chat.send_message(genai.types.Part.from_bytes(
+                data=pdf_bytes,
+                mime_type='application/pdf'
+            ))
+        
+        st.session_state.pdfs_loaded = True
+
+if st.button("Analyze PDFs", type="primary"):
+    with st.spinner("Analyzing..."):
+        response = chat.send_message("What is the content of these PDFs?")
+        st.subheader("Gemini Response:")
+        st.write(response.text)
+```
