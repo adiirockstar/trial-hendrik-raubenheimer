@@ -36,7 +36,9 @@ I primarily used GitHub copilot power by Claude Sonnet 4.
 
 #### AI Prompt Timeline
 
-**Prompt:** Create a simple RAG agent built off Gemini's API, and that uses data in /Input (With 'from google import genai' already typed out) \
+***I started by getting copilot to make a RAG agent after I imported Gemini's API***
+
+**Prompt:** Create a simple RAG agent built off Gemini's API, and that uses data in /Input \
 **Response:** \
 <code>import os
 import glob
