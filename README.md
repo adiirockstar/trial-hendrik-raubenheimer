@@ -94,3 +94,14 @@ if __name__ == "__main__":
     user_query = input("Ask a question: ")
     answer = ask_gemini_with_files(user_query, pdf_paths)
     print("Gemini:", answer)<\code>
+
+***At this point I realised my coding agent is not familiar with Gemini's API, so I decided to code manually for a bit given I have experience with the API. I began by checking how to convert pdf files to bytes***
+
+**Prompt:** How can I read in a pdf in bytes
+**Response:**\
+<code>In Python, you can read a PDF file in bytes by opening it with the "rb" (read-binary) mode:
+
+with open("path/to/file.pdf", "rb") as f:
+    pdf_bytes = f.read()
+
+This will load the entire PDF file into the variable pdf_bytes as a bytes object. You can then use this bytes object with libraries like PyPDF2, pdfplumber, or send it over a network, etc.<\code>
